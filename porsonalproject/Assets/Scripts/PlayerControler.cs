@@ -15,10 +15,23 @@ public class PlayerControler : MonoBehaviour {
         if (Input.GetKey(KeyCode.W))
         {
             this.transform.position += new Vector3(0,0,0.07f);
+
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.A))
         {
-            rigidbody.velocity = new Vector3(0, 1, 0);
+            this.transform.position += new Vector3(-0.07f, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            this.transform.position += new Vector3(0.07f, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            this.transform.position += new Vector3(0, 0, -0.07f);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rigidbody.velocity = new Vector3(0, 5, 0);
         }
 	}
 }
