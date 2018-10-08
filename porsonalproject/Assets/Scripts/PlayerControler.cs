@@ -14,7 +14,7 @@ public class PlayerControler : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.W))
         {
-            this.transform.position += new Vector3(0,0,0.07f);
+            rigidbody.AddForce(new Vector3(0,0,10));
 
         }
         if (Input.GetKey(KeyCode.A))
