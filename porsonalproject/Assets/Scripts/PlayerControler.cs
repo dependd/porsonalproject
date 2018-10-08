@@ -3,35 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControler : MonoBehaviour {
-    Rigidbody rigidbody;
 
-	// Use this for initialization
-	void Start () {
-        rigidbody = GetComponent<Rigidbody>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    public float speed; //プレイヤーの動くスピード
+
+    private Vector3 Player_pos; //プレイヤーのポジション
+    private float x; //x方向のImputの値
+    private float z; //z方向のInputの値
+    private Rigidbody rigd;
+
+    void Start()
+    {
+        Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
+        rigd = GetComponent<Rigidbody>(); //プレイヤーのRigidbodyを取得
+    }
+
+    void Update()
+    {
+
+        x = Input.GetAxis("Horizontal"); //x方向のInputの値を取得
+        z = Input.GetAxis("Vertical"); //z方向のInputの値を取得
+
+        rigd.velocity = new Vector3(x * speed, 0, z * speed); //プレイヤーのRigidbodyに対してInputにspeedを掛けた値で更新し移動
+
+        Vector3 diff = transform.position - Player_pos; //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
+
+        if (diff.magnitude > 0.01f) //ベクトルの長さが0.01fより大きい場合にプレイヤーの向きを変える処理を入れる(0では入れないので）
+        {
+            transform.rotation = Quaternion.LookRotation(diff);  //ベクトルの情報をQuaternion.LookRotationに引き渡し回転量を取得しプレイヤーを回転させる
+        }
         if (Input.GetKey(KeyCode.W))
         {
-            rigidbody.AddForce(new Vector3(0,0,10));
 
+            Player_pos = transform.position; //プレイヤーの位置を更新
         }
-        if (Input.GetKey(KeyCode.A))
-        {
-            this.transform.position += new Vector3(-0.07f, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            this.transform.position += new Vector3(0.07f, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            this.transform.position += new Vector3(0, 0, -0.07f);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rigidbody.velocity = new Vector3(0, 5, 0);
-        }
-	}
+
+
+    }
 }
