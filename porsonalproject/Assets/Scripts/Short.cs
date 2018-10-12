@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Short : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField] GameObject bullet;
+    private const float speed = 10.0f;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        
+    }
 }
