@@ -8,6 +8,9 @@ public class CameraRotation : MonoBehaviour
     public Transform verRot;
     public Transform horRot;
 
+    public float rotX;
+    public float rotY;
+
     // Use this for initialization
     void Start()
     {
@@ -23,5 +26,7 @@ public class CameraRotation : MonoBehaviour
         float Y_Rotation = Input.GetAxis("Mouse Y");
         verRot.transform.Rotate(0, X_Rotation, 0);
         horRot.transform.Rotate(-Y_Rotation, 0, 0);
+        rotX = verRot.localRotation.y;
+        rotY = horRot.localRotation.x;
     }
 }

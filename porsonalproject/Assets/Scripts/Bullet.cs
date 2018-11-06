@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
+    Vector3 vec3;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +18,11 @@ public class Bullet : MonoBehaviour {
 
     void MoveBullet()
     {
-        this.transform.position += new Vector3(0,0,1);
+        this.transform.position += vec3;
+    }
+
+    public void BulletLotation(float x,float y)
+    {
+        vec3 = new Vector3(x, y, 0);
     }
 }
