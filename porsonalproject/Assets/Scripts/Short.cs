@@ -6,7 +6,7 @@ public class Short : MonoBehaviour {
 
     [SerializeField] GameObject bullet;
     [SerializeField] Bullet bulletScript;
-    private const float speed = 10.0f;
+    public float speed;//弾速
 
     [SerializeField] GameObject camera;
     [SerializeField] CameraRotation rotation;
@@ -19,9 +19,22 @@ public class Short : MonoBehaviour {
 	void Update () {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(bullet,transform.position,Quaternion.identity);
-            bulletScript.BulletLotation(rotation.rotX,rotation.rotY);
-            Debug.Log(rotation.rotX + rotation.rotY);
+            /*
+            var rotY = 0f;
+            var rotZ = 0f;
+            if (rotation.rotY >= 180)
+            {
+                rotY = -rotation.rotY + 360;
+            }else 
+            {
+                rotY = -rotation.rotY;
+            }
+            var vec3 = new Vector3(rotY, rotation.rotX, 0);
+            */
+            var vec3 = camera.transform.forward;
+            var tama = Instantiate(bullet, transform.position + vec3, camera.transform.rotation);
+            tama.GetComponent<Rigidbody>().velocity = vec3 * speed;
+            Debug.Log(tama.GetComponent<Rigidbody>().velocity);
         }
         
     }

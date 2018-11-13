@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraRotation : MonoBehaviour
 {
     public float rotSpeed = 3.0f;
+    public Transform varRot;
     public Transform horRot;
 
     public float rotX;
@@ -13,7 +14,9 @@ public class CameraRotation : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        varRot = horRot.parent;
         horRot = GetComponent<Transform>();
     }
 
@@ -31,5 +34,6 @@ public class CameraRotation : MonoBehaviour
         while (rotY > 360.0f) { rotY -= 360.0f; }
         
         horRot.transform.eulerAngles = new Vector3(-rotX, -rotY, 0);
+        varRot.transform.eulerAngles = new Vector3(0, -rotY, 0);
     }
 }
