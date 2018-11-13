@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CameraRotation : MonoBehaviour
 {
-
-    public Transform verRot;
+    public float rotSpeed = 3.0f;
     public Transform horRot;
 
     public float rotX;
@@ -14,8 +13,7 @@ public class CameraRotation : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        verRot = transform.parent;
+        
         horRot = GetComponent<Transform>();
     }
 
@@ -24,9 +22,14 @@ public class CameraRotation : MonoBehaviour
     {
         float X_Rotation = Input.GetAxis("Mouse X");
         float Y_Rotation = Input.GetAxis("Mouse Y");
-        verRot.transform.Rotate(0, X_Rotation, 0);
-        horRot.transform.Rotate(-Y_Rotation, 0, 0);
-        rotX = verRot.localRotation.y;
-        rotY = horRot.localRotation.x;
+
+        rotX += Y_Rotation * rotSpeed;
+        rotY -= X_Rotation * rotSpeed;
+
+        rotX = Mathf.Clamp(rotX, -90.0f, 90.0f);
+        while (rotY < 0.0f) { rotY += 360.0f; }
+        while (rotY > 360.0f) { rotY -= 360.0f; }
+        
+        horRot.transform.eulerAngles = new Vector3(-rotX, -rotY, 0);
     }
 }
