@@ -11,6 +11,7 @@ public class Scope : MonoBehaviour {
     public float maxLenge;
     public float minLenge;
     [SerializeField] RawImage scopeObj;
+    [SerializeField] GameObject SR;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,7 @@ public class Scope : MonoBehaviour {
     public void ADS(Vector3 vec3)
     {
         scopeObj.color = new Color(1, 1, 1, 1);
+        SR.SetActive(false);
         camera.transform.position = camera.transform.position + vec3 * lenge;
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll > 0.0f)

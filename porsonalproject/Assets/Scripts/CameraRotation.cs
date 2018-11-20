@@ -14,6 +14,7 @@ public class CameraRotation : MonoBehaviour
 
     Scope scope;
     [SerializeField] RawImage scopeObj;
+    [SerializeField] GameObject SR;
 
     // Use this for initialization
     void Start()
@@ -28,7 +29,8 @@ public class CameraRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horRot.transform.position = varRot.transform.position;
+        horRot.position = varRot.transform.position;
+        horRot.position += new Vector3(0,1,0);
 
         float X_Rotation = Input.GetAxis("Mouse X");
         float Y_Rotation = Input.GetAxis("Mouse Y");
@@ -50,6 +52,7 @@ public class CameraRotation : MonoBehaviour
         else
         {
             scopeObj.color = new Color(1, 1, 1, 0);
+            SR.SetActive(true);
         }
     }
 }
