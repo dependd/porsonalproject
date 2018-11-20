@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraRotation : MonoBehaviour
 {
@@ -11,18 +12,24 @@ public class CameraRotation : MonoBehaviour
     public float rotX;
     public float rotY;
 
+    Scope scope;
+    [SerializeField] RawImage scopeObj;
+
     // Use this for initialization
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        varRot = horRot.parent;
+        varRot = GameObject.Find("Player").transform;
         horRot = GetComponent<Transform>();
+        scope = GetComponent<Scope>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        horRot.transform.position = varRot.transform.position;
+
         float X_Rotation = Input.GetAxis("Mouse X");
         float Y_Rotation = Input.GetAxis("Mouse Y");
 
@@ -35,5 +42,14 @@ public class CameraRotation : MonoBehaviour
         
         horRot.transform.eulerAngles = new Vector3(-rotX, -rotY, 0);
         varRot.transform.eulerAngles = new Vector3(0, -rotY, 0);
+
+        if (Input.GetMouseButton(1))
+        {
+            scope.ADS(this.transform.forward);
+        }
+        else
+        {
+            scopeObj.color = new Color(1, 1, 1, 0);
+        }
     }
 }
