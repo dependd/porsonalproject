@@ -25,7 +25,8 @@ public class Scope : MonoBehaviour {
     public void ADS(Vector3 vec3)
     {
         scopeObj.color = new Color(1, 1, 1, 1);
-        SR.SetActive(false);
+        Vector3 vec = SR.transform.position;
+        SR.transform.position = new Vector3(1, 1, 1);
         camera.transform.position = camera.transform.position + vec3 * lenge;
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll > 0.0f)

@@ -19,8 +19,8 @@ public class CameraRotation : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
         varRot = GameObject.Find("Player").transform;
         horRot = GetComponent<Transform>();
         scope = GetComponent<Scope>();
