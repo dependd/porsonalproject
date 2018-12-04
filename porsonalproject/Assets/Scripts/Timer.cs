@@ -24,6 +24,8 @@ public class Timer : MonoBehaviour {
             time -= Time.deltaTime;
             if(time < 0)
             {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 SceneManager.LoadScene("Result");
             }
             var str = time.ToString("F0");

@@ -4,21 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameControlor : MonoBehaviour {
-
     public enum Difficulty
     {
         easy,
         normal,
         hard
     }
-    private enum Scene
-    {
-        start,
-        game,
-        end
-    }
     public Difficulty difficulty;
-    private Scene scene;
+    
 
     private void Awake()
     {

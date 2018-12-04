@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class CameraRotation : MonoBehaviour
 {
     public float rotSpeed = 3.0f;
+    public float ADSSpeed = 1.5f;
     public Transform varRot;
     public Transform horRot;
 
+    float rot = 0;
     public float rotX;
     public float rotY;
 
@@ -19,8 +21,8 @@ public class CameraRotation : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         varRot = GameObject.Find("Player").transform;
         horRot = GetComponent<Transform>();
         scope = GetComponent<Scope>();
@@ -34,9 +36,9 @@ public class CameraRotation : MonoBehaviour
 
         float X_Rotation = Input.GetAxis("Mouse X");
         float Y_Rotation = Input.GetAxis("Mouse Y");
-
-        rotX += Y_Rotation * rotSpeed;
-        rotY -= X_Rotation * rotSpeed;
+        
+        rotX += Y_Rotation * rot;
+        rotY -= X_Rotation * rot;
 
         rotX = Mathf.Clamp(rotX, -90.0f, 90.0f);
         while (rotY < 0.0f) { rotY += 360.0f; }
@@ -47,10 +49,12 @@ public class CameraRotation : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
+            rot = ADSSpeed;
             scope.ADS(this.transform.forward);
         }
         else
         {
+            rot = rotSpeed;
             scopeObj.color = new Color(1, 1, 1, 0);
             SR.SetActive(true);
         }

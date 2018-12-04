@@ -21,6 +21,14 @@ public class Bullet : MonoBehaviour {
         Debug.Log(collision.gameObject.tag);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene("Result") ;//後々変更
+        //SceneManager.LoadScene("Result") ;//後々変更
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+
+        Debug.Log(other.gameObject.tag);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("Result");//後々変更
     }
 }

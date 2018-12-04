@@ -24,7 +24,7 @@ public class Short : MonoBehaviour {
             var tama = Instantiate(bullet, transform.position + vec3 + new Vector3(0, 1, 0), camera.transform.rotation);
             tama.GetComponent<Rigidbody>().velocity = vec3 * speed;
             Debug.Log(tama.GetComponent<Rigidbody>().velocity);
-            isShort = false;
+            //isShort = false;
             Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
             timer.countDown = false;
         }
