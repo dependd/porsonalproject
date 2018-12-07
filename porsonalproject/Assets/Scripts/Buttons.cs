@@ -7,7 +7,7 @@ public class Buttons : MonoBehaviour {
     GameControlor controlor;
 	// Use this for initialization
 	void Start () {
-        controlor = GameObject.Find("GameManager").GetComponent<GameControlor>();
+        controlor = GameObject.Find("GameControler").GetComponent<GameControlor>();
 	}
 	
     public void Easy()
