@@ -12,7 +12,9 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        //lateUpdateでまいふれーむ弾丸の位置を取得
+        //前回のフレームの弾丸と今のフレームの弾丸の位置を比べ、rayを飛ばす
+        //そのrayにオブジェクトが当たっているなら処理
 	}
 
 
