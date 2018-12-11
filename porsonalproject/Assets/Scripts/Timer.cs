@@ -8,7 +8,6 @@ public class Timer : MonoBehaviour {
     [SerializeField]GameObject timerObj;
     Text text;
     TextChenge textChenge;
-    GameControlor gameControlor;
 
     private float time;
     public int MaxTime;
@@ -18,7 +17,6 @@ public class Timer : MonoBehaviour {
 	void Start () {
         text = timerObj.GetComponent<Text>();
         textChenge = timerObj.GetComponent<TextChenge>();
-        gameControlor = GameObject.Find("GameControler").GetComponent<GameControlor>();
         ChangeTimer();
 	}
 	
@@ -40,14 +38,14 @@ public class Timer : MonoBehaviour {
         {
             if (isCatch)
             {
-                GameManager.Instance.CatchTimer(time, MaxTime);
+                GameControlor.Instance.CatchTimer(time, MaxTime);
                 isCatch = false;
             }
         }
 	}
     private void ChangeTimer()
     {
-        switch (gameControlor.difficulty)
+        switch (GameControlor.Instance.difficulty)
         {
             case GameControlor.Difficulty.easy:
                 time = 180;

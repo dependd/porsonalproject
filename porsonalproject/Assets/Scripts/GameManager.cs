@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : SingletonMonoBehaviour<GameManager> {
+public class GameManager : MonoBehaviour {
     GameControlor gameControlor;
     [SerializeField] Vector3[] enemyPoints;
-
-    [HideInInspector]public float time;
-    [HideInInspector] public int Maxtime;
-    [HideInInspector] public string hitPos;
+    
     // Use this for initialization
     void Start () {
 		gameControlor = GameObject.Find("GameControler").GetComponent<GameControlor>();
+        Up();
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-    public void Up()
+    private void Up()
     {
         switch (gameControlor.difficulty)
         {
@@ -37,14 +35,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
     private void InstanceEnemy(int max)
     {
         int i = Random.Range(0,max + 1);
-        // enemyPoints[i];
-    }
-    public void CatchTimer(float x,int y)
-    {
-        time = x;Maxtime = y;;
-    }
-    public void CatchPos(string pos)
-    {
-        hitPos = pos;
+        var obj = GameObject.Find("PronamaChan1");
+        obj.transform.position = enemyPoints[i];
+        Debug.Log(enemyPoints[i]);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameControlor : MonoBehaviour {
+public class GameControlor : SingletonMonoBehaviour<GameControlor> {
     public enum Difficulty
     {
         easy,
@@ -11,7 +11,10 @@ public class GameControlor : MonoBehaviour {
         hard
     }
     public Difficulty difficulty;
-    
+
+    [HideInInspector] public float time;
+    [HideInInspector] public int Maxtime;
+    [HideInInspector] public string hitPos;
 
     private void Awake()
     {
@@ -28,4 +31,12 @@ public class GameControlor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
+    public void CatchTimer(float x, int y)
+    {
+        time = x; Maxtime = y; ;
+    }
+    public void CatchPos(string pos)
+    {
+        hitPos = pos;
+    }
 }

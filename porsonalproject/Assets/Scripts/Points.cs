@@ -9,7 +9,7 @@ public class Points : MonoBehaviour {
 	void Start () {
         score = TimeToPoint();
         string a = score.ToString();
-        text.TextUpdate(a);
+        text.TextUpdate(a + "Point!!");
 	}
 	
 	// Update is called once per frame
@@ -18,8 +18,9 @@ public class Points : MonoBehaviour {
 	}
     private int TimeToPoint()
     {
-        int i = (int)(GameManager.Instance.time) * 10;
-        switch (GameManager.Instance.hitPos)
+        int i = (int)(GameControlor.Instance.time) * (7 - GameControlor.Instance.Maxtime / 30);
+        Debug.Log(GameControlor.Instance.time + " * " + ("7 - " + GameControlor.Instance.Maxtime + " / 30" ));
+        switch (GameControlor.Instance.hitPos)
         {
             case "Leg":
                 i += 50;
@@ -35,6 +36,9 @@ public class Points : MonoBehaviour {
                 break;
             case "Head":
                 i += 250;
+                break;
+            default:
+                i = 0;
                 break;
         }
         Debug.Log(i);

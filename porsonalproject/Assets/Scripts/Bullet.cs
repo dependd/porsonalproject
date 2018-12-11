@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.tag);
-        GameManager.Instance.CatchPos(collision.gameObject.tag);
+        GameControlor.Instance.CatchPos(collision.gameObject.tag);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Result") ;//後々変更
