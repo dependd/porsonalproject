@@ -14,4 +14,5 @@ public class TextChenge : MonoBehaviour {
     {
         text.text = str;
     }
+    
 }
