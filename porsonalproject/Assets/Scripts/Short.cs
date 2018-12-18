@@ -27,6 +27,7 @@ public class Short : MonoBehaviour {
             //isShort = false;
             Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
             timer.countDown = false;
+            isShort = false;
         }
 
     }

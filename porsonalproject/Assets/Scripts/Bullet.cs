@@ -24,7 +24,6 @@ public class Bullet : MonoBehaviour {
         //rayの作成
         Vector3 pos = transform.position;
         Ray ray = new Ray(fastPos,pos - fastPos);
-        Debug.Log(ray);
         //rayが当たったオブジェクトの情報を入れる箱
         RaycastHit hit;
         //rayの飛ばせる距離

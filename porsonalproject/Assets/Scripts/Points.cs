@@ -47,6 +47,7 @@ public class Points : MonoBehaviour {
                 i = 0;
                 break;
         }
+        int differenceTime = GameControlor.Instance.Maxtime;
         i = i * 30 / GameControlor.Instance.Maxtime;
         Debug.Log("難易度による差し引き = " + (i = i * 1 / GameControlor.Instance.Maxtime));
         int a = (int)Mathf.Floor(i);
