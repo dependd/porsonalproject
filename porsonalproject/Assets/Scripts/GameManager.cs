@@ -48,6 +48,6 @@ public class GameManager : MonoBehaviour {
         {
             text.TextUpdate("相手は自分より低い位置にいるぞ！");
         }
-        Debug.Log(enemyPoints[i]);
+        //Debug.Log(enemyPoints[i]);
     }
 }
