@@ -19,7 +19,7 @@ public class Points : MonoBehaviour {
 	}
     private int TimeToPoint()
     {
-        float i = (GameControlor.Instance.Maxtime - GameControlor.Instance.time) * 1000;
+        float i = (GameControlor.Instance.Maxtime - GameControlor.Instance.time) * 100;
         Debug.Log("タイムによるスコア = " + i);
         switch (GameControlor.Instance.hitPos)
         {
@@ -47,9 +47,22 @@ public class Points : MonoBehaviour {
                 i = 0;
                 break;
         }
-        int differenceTime = GameControlor.Instance.Maxtime;
-        i = i * 30 / GameControlor.Instance.Maxtime;
-        Debug.Log("難易度による差し引き = " + (i = i * 1 / GameControlor.Instance.Maxtime));
+        switch (GameControlor.Instance.difficulty)
+        {
+            case GameControlor.Difficulty.easy:
+                Debug.Log("難易度ボーナスが" + 2 + "倍つきます");
+                i = i * 2;
+                break;
+            case GameControlor.Difficulty.normal:
+                Debug.Log("難易度ボーナスが" + 2.5 + "倍つきます");
+                i = i * 2.5f;
+                break;
+            case GameControlor.Difficulty.hard:
+                Debug.Log("難易度ボーナスが" + 3 + "倍つきます");
+                i = i * 3;
+                break;
+
+        }
         int a = (int)Mathf.Floor(i);
         Debug.Log("結果 = " + a);
         return a;

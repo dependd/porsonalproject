@@ -33,12 +33,7 @@ public class Bullet : MonoBehaviour {
         //もしrayがオブジェクトに衝突したら
         if(Physics.Raycast(ray,out hit, distance))
         {
-            //あたったオブジェクトによって処理
-            Debug.Log(hit.collider.gameObject.tag);
-            GameControlor.Instance.CatchPos(hit.collider.gameObject.tag);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("Result");//後々変更
+            StartCoroutine(WaitChangeScene(ray, hit, distance));
         }
         else
         {
@@ -54,5 +49,16 @@ public class Bullet : MonoBehaviour {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Result") ;//後々変更*/
+    }
+
+    IEnumerator WaitChangeScene(Ray ray,RaycastHit hit,int dictance)
+    {
+        yield return new WaitForSeconds(3);
+        //あたったオブジェクトによって処理
+        Debug.Log(hit.collider.gameObject.tag);
+        GameControlor.Instance.CatchPos(hit.collider.gameObject.tag);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("Result");//後々変更
     }
 }

@@ -7,30 +7,55 @@ public class Scope : MonoBehaviour {
 
     [SerializeField]GameObject camera;
 
-    [SerializeField]private float lenge;
+    public float lenge;
     public float maxLenge;
     public float minLenge;
     [SerializeField] RawImage scopeObj;
     [SerializeField] GameObject SR;
+    Vector3 fastPos;
+    bool Scoping = false;
+    // Use this for initialization
+    void Start()
+    {
+        fastPos = transform.position;
+    }
 
-	// Use this for initialization
-	void Start () {
+    // Update is called once per frame
+    void Update () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void FixedUpdate()
+    {
+        //rayの作成
+        Vector3 pos = transform.position;
+        Ray ray = new Ray(fastPos, pos - fastPos);
+        //rayが当たったオブジェクトの情報を入れる箱
+        RaycastHit hit;
+        //rayの飛ばせる距離
+        int distance = 5;
+        //rayの可視化
+        Debug.DrawLine(ray.origin, ray.direction * distance, Color.red);
+        //もしrayがオブジェクトに衝突したら
+        if (Physics.Raycast(ray, out hit, distance))
+        {
+            transform.position = fastPos;
+            Scoping = true;
+        }
+        else
+        {
+            fastPos = pos;
+            Scoping = false;
+        }
+    }
     public void ADS(Vector3 vec3)
     {
         scopeObj.color = new Color(1, 1, 1, 1);
-        Vector3 vec = SR.transform.position;
-        SR.transform.position = new Vector3(1, 1, 1);
+        SR.SetActive(false);
         camera.transform.position = camera.transform.position + vec3 * lenge;
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll > 0.0f)
         {
+            if (Scoping) return;
             if (lenge <= maxLenge) lenge += 1;
         }else if (scroll < 0.0f)
         {
