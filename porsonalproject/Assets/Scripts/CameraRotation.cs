@@ -57,7 +57,7 @@ public class CameraRotation : MonoBehaviour
             rot = rotSpeed;
             scopeObj.color = new Color(1, 1, 1, 0);
             SR.SetActive(true);
-            scope.lenge = 20;
+            Camera.main.fieldOfView = 60;
         }
     }
 }

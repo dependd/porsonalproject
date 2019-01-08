@@ -13,6 +13,7 @@ public class Scope : MonoBehaviour {
     [SerializeField] RawImage scopeObj;
     [SerializeField] GameObject SR;
     Vector3 fastPos;
+    Vector3 basePos;
     bool Scoping = false;
     // Use this for initialization
     void Start()
@@ -26,9 +27,11 @@ public class Scope : MonoBehaviour {
 	}
     private void FixedUpdate()
     {
+        /*
         //rayの作成
         Vector3 pos = transform.position;
         Ray ray = new Ray(fastPos, pos - fastPos);
+        Ray ray2 = new Ray(basePos, pos);
         //rayが当たったオブジェクトの情報を入れる箱
         RaycastHit hit;
         //rayの飛ばせる距離
@@ -36,30 +39,41 @@ public class Scope : MonoBehaviour {
         //rayの可視化
         Debug.DrawLine(ray.origin, ray.direction * distance, Color.red);
         //もしrayがオブジェクトに衝突したら
-        if (Physics.Raycast(ray, out hit, distance))
+        if (Physics.Raycast(ray2,out hit,distance))
         {
-            transform.position = fastPos;
-            Scoping = true;
+            transform.position = basePos;
         }
         else
         {
-            fastPos = pos;
-            Scoping = false;
-        }
+            if (Physics.Raycast(ray, out hit, distance))
+            {
+                transform.position = fastPos;
+                Scoping = true;
+            }
+            else
+            {
+                fastPos = pos;
+                Scoping = false;
+            }
+        }*/
     }
     public void ADS(Vector3 vec3)
     {
         scopeObj.color = new Color(1, 1, 1, 1);
         SR.SetActive(false);
-        camera.transform.position = camera.transform.position + vec3 * lenge;
+        //camera.transform.position = camera.transform.position + vec3 * lenge;
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll > 0.0f)
         {
             if (Scoping) return;
-            if (lenge <= maxLenge) lenge += 1;
+            //if (lenge <= maxLenge) lenge += 1;
+            if(Camera.main.fieldOfView > minLenge)Camera.main.fieldOfView -= 1;
+            Debug.Log(Camera.main.fieldOfView);
         }else if (scroll < 0.0f)
         {
-            if(lenge >= minLenge) lenge -= 1;
+            //if(lenge >= minLenge) lenge -= 1;40
+            if (Camera.main.fieldOfView < maxLenge) Camera.main.fieldOfView -= 1;
+            Debug.Log(Camera.main.fieldOfView);
         }
     }
 }

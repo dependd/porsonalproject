@@ -36,6 +36,10 @@ public class Bullet : MonoBehaviour {
         {
             StartCoroutine(WaitChangeScene(ray, hit, distance));
         }
+        else
+        {
+            fastPos = pos;
+        }
         
     }
 
@@ -54,6 +58,7 @@ public class Bullet : MonoBehaviour {
         yield return new WaitForSeconds(3);
         //あたったオブジェクトによって処理
         Debug.Log(hit.collider.gameObject.tag);
+        Debug.Log(hit.collider.gameObject.name);
         GameControlor.Instance.CatchPos(hit.collider.gameObject.tag);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
