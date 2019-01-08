@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Bullet : MonoBehaviour {
 
     Vector3 fastPos;
+    Vector3 basePos;
 
 	// Use this for initialization
 	void Start () {
@@ -31,14 +32,11 @@ public class Bullet : MonoBehaviour {
         //rayの可視化
         Debug.DrawLine(ray.origin,ray.direction * distance,Color.red);
         //もしrayがオブジェクトに衝突したら
-        if(Physics.Raycast(ray,out hit, distance))
+        if (Physics.Raycast(ray, out hit, distance))
         {
             StartCoroutine(WaitChangeScene(ray, hit, distance));
         }
-        else
-        {
-            fastPos = pos;
-        }
+        
     }
 
 

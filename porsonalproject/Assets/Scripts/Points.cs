@@ -19,7 +19,18 @@ public class Points : MonoBehaviour {
 	}
     private int TimeToPoint()
     {
-        float i = (GameControlor.Instance.Maxtime - GameControlor.Instance.time) * 100;
+        float i = (GameControlor.Instance.Maxtime-(GameControlor.Instance.Maxtime - GameControlor.Instance.time)) * 100;
+        switch (GameControlor.Instance.difficulty)
+        {
+            case GameControlor.Difficulty.easy:
+                break;
+            case GameControlor.Difficulty.hard:
+                i = i * 3;
+                break;
+            case GameControlor.Difficulty.normal:
+                i = i * 6;
+                break;
+        }
         Debug.Log("タイムによるスコア = " + i);
         switch (GameControlor.Instance.hitPos)
         {
