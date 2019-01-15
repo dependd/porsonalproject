@@ -49,5 +49,6 @@ public class GameManager : MonoBehaviour {
             text.TextUpdate("相手は自分より低い位置にいるぞ！");
         }
         //Debug.Log(enemyPoints[i]);
+        GameObject.Find("PronamaChan1").GetComponent<Enemy>().LookPlayer();
     }
 }

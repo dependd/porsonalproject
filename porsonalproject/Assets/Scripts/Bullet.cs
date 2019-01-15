@@ -14,25 +14,27 @@ public class Bullet : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
         //lateUpdateでまいふれーむ弾丸の位置を取得
         //前回のフレームの弾丸と今のフレームの弾丸の位置を比べ、rayを飛ばす
         //そのrayにオブジェクトが当たっているなら処理
-	}
+	//}
 
-    private void FixedUpdate()
+    private void Update()
     {
+        fastPos = transform.position;
+
         //rayの作成
-        Vector3 pos = transform.position;
-        Ray ray = new Ray(fastPos,pos - fastPos);
+        Vector3 pos = transform.forward;
+        Ray ray = new Ray(fastPos,pos);
         //rayが当たったオブジェクトの情報を入れる箱
         RaycastHit hit;
         //rayの飛ばせる距離
         int distance = 1;
         //rayの可視化
-        Debug.DrawLine(ray.origin,ray.direction * distance,Color.red);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance,Color.red);
         //もしrayがオブジェクトに衝突したら
-        if (Physics.Raycast(ray, out hit, distance))
+        if (Physics.Raycast(ray, out hit, distance))//, LayerMask.NameToLayer("Default")))
         {
             //あたったオブジェクトによって処理
             Debug.Log(hit.collider.gameObject.tag);
@@ -41,12 +43,9 @@ public class Bullet : MonoBehaviour {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("Result");//後々変更
+        } else {
+
         }
-        else
-        {
-            fastPos = pos;
-        }
-        
     }
 
 
