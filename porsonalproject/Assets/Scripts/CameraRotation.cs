@@ -13,6 +13,7 @@ public class CameraRotation : MonoBehaviour
     float rot = 0;
     public float rotX;
     public float rotY;
+    bool loop = false;
 
     Scope scope;
     [SerializeField] RawImage scopeObj;
@@ -46,15 +47,20 @@ public class CameraRotation : MonoBehaviour
         
         horRot.transform.eulerAngles = new Vector3(-rotX, -rotY, 0);
         varRot.transform.eulerAngles = new Vector3(0, -rotY, 0);
-
         if (Input.GetMouseButton(1))
         {
+            if (!loop)
+            {
+                Camera.main.fieldOfView = 40;
+                loop = true;
+            }
             rot = ADSSpeed;
             scope.ADS(this.transform.forward);
         }
         else
         {
             rot = rotSpeed;
+            loop = false;
             scopeObj.color = new Color(1, 1, 1, 0);
             SR.SetActive(true);
             Camera.main.fieldOfView = 60;

@@ -28,13 +28,19 @@ public class Bullet : MonoBehaviour {
         //rayが当たったオブジェクトの情報を入れる箱
         RaycastHit hit;
         //rayの飛ばせる距離
-        int distance = 5;
+        int distance = 1;
         //rayの可視化
         Debug.DrawLine(ray.origin,ray.direction * distance,Color.red);
         //もしrayがオブジェクトに衝突したら
         if (Physics.Raycast(ray, out hit, distance))
         {
-            StartCoroutine(WaitChangeScene(ray, hit, distance));
+            //あたったオブジェクトによって処理
+            Debug.Log(hit.collider.gameObject.tag);
+            Debug.Log(hit.collider.gameObject.name);
+            GameControlor.Instance.CatchPos(hit.collider.gameObject.tag);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("Result");//後々変更
         }
         else
         {

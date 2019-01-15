@@ -68,12 +68,10 @@ public class Scope : MonoBehaviour {
             if (Scoping) return;
             //if (lenge <= maxLenge) lenge += 1;
             if(Camera.main.fieldOfView > minLenge)Camera.main.fieldOfView -= 1;
-            Debug.Log(Camera.main.fieldOfView);
         }else if (scroll < 0.0f)
         {
             //if(lenge >= minLenge) lenge -= 1;40
-            if (Camera.main.fieldOfView < maxLenge) Camera.main.fieldOfView -= 1;
-            Debug.Log(Camera.main.fieldOfView);
+            if (Camera.main.fieldOfView < maxLenge) Camera.main.fieldOfView += 1;
         }
     }
 }
