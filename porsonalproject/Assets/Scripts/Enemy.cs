@@ -5,11 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem _pSystem;
-    Rigidbody2D rg2d;
+    Rigidbody rg2d;
+
+    Vector3 pos;
 	// Use this for initialization
 	void Start () {
-        rg2d = GetComponent<Rigidbody2D>();
-	}
+        rg2d = GetComponent<Rigidbody>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,8 +23,7 @@ public class Enemy : MonoBehaviour {
     }
     public void MoveEnemy()
     {
-        rg2d.AddForce(new Vector3(0,100,200));
-        _pSystem.transform.position = transform.position;
-        _pSystem.Play();
+        rg2d.AddForce(-transform.forward * 200,ForceMode.Impulse);
+        Instantiate(_pSystem, transform.position, Quaternion.identity);
     }
 }

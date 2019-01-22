@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour {
 
     Vector3 fastPos;
     Vector3 basePos;
+    bool isHit = false;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class Bullet : MonoBehaviour {
 
     private void Update()
     {
+        if (isHit) return;
         fastPos = transform.position;
 
         //rayの作成
@@ -37,6 +39,7 @@ public class Bullet : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, distance))//, LayerMask.NameToLayer("Default")))
         {
             StartCoroutine(WaitChangeScene(ray,hit,distance));
+            isHit = true;
         } else {
 
         }
@@ -54,7 +57,10 @@ public class Bullet : MonoBehaviour {
 
     IEnumerator WaitChangeScene(Ray ray,RaycastHit hit,int dictance)
     {
-        GameObject.Find("PronamaChan1").GetComponent<Enemy>().MoveEnemy();
+        if (hit.collider.gameObject.tag != "Building")
+        {
+            GameObject.Find("PronamaChan1").GetComponent<Enemy>().MoveEnemy();
+        }
         yield return new WaitForSeconds(3);
         //あたったオブジェクトによって処理
         Debug.Log(hit.collider.gameObject.tag);
