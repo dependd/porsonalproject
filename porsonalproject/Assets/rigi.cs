@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class sc : MonoBehaviour {
+public class rigi : MonoBehaviour {
+
     Rigidbody rg;
 	// Use this for initialization
 	void Start () {
         rg = GetComponent<Rigidbody>();
-        Move();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-    private void Move()
-    {
-        rg.AddForce(new Vector3(300, 2000, 300), ForceMode.Impulse);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 vector = new Vector3(-transform.forward.x, 1, -transform.forward.z);
+            rg.velocity = vector * 20000;
+        }
     }
+    
 }

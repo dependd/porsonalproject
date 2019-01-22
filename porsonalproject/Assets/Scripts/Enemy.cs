@@ -23,7 +23,8 @@ public class Enemy : MonoBehaviour {
     }
     public void MoveEnemy()
     {
-        rg2d.AddForce(-transform.forward * 200,ForceMode.Impulse);
+        Vector3 vector = new Vector3(-transform.forward.x, 1, -transform.forward.z);
+        rg2d.velocity = vector * 20000;
         Instantiate(_pSystem, transform.position, Quaternion.identity);
     }
 }
